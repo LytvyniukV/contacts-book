@@ -43,6 +43,7 @@ export const EditForm = () => {
     }
     const newContact = { id: contact.id, ...values };
     dispatch(editContact(newContact));
+    dispatch(toggleModal(false));
     actions.resetForm();
   };
   return (

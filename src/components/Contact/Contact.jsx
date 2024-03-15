@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contactsSlice';
 import { setContact } from '../../redux/singleContact';
 import { toggleModal } from '../../redux/modalSlice';
+import { IoMdMail } from 'react-icons/io';
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
   const openEditing = () => {
@@ -20,7 +21,10 @@ export const Contact = ({ contact }) => {
         <p className={css.number}>
           <FaPhone className={css.icon} size={15} /> {contact.number}
         </p>
-        <p className={css.email}>{contact.email}</p>
+        <p className={css.email}>
+          <IoMdMail className={css.icon} size={20} />
+          {contact.email}
+        </p>
       </div>
       <div className={css.btnWrap}>
         <button className={css.button} type="button" onClick={openEditing}>

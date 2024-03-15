@@ -13,9 +13,10 @@
   color: black;
 }
 .email {
-  font-size: 22px;
+  font-size: 24px;
   color: black;
-  
+  display: flex;
+  align-items: center;
 }
 .button {
   width: 100px;

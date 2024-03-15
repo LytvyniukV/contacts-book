@@ -13,4 +13,4 @@ const modalSlice = createSlice({
 });
 export const { toggleModal } = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;
-export const selectModal = state => state.status;
+export const selectModal = state => state.modal.status;
