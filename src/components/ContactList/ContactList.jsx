@@ -16,10 +16,10 @@ export const ContactList = () => {
   const filteredContacts = getFilteredContacts();
   return (
     <ul className={css.list}>
-      {filteredContacts.map(({ id, name, number }) => {
+      {filteredContacts.map(contact => {
         return (
-          <li className={css.item} key={id}>
-            <Contact name={name} number={number} id={id} />
+          <li className={css.item} key={contact.id}>
+            <Contact contact={contact} />
           </li>
         );
       })}

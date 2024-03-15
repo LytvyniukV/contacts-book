@@ -12,6 +12,11 @@
   font-size: 22px;
   color: black;
 }
+.email {
+  font-size: 22px;
+  color: black;
+  
+}
 .button {
   width: 100px;
   height: 35px;
@@ -31,4 +36,9 @@
 }
 .icon {
   margin-right: 5px;
+}
+.btnWrap{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

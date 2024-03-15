@@ -1,10 +1,12 @@
 import { useId } from 'react';
-import css from './ContactForm.module.css';
+import css from './EditForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, selectContacts } from '../../redux/contactsSlice';
+import { editContact, selectContacts } from '../../redux/contactsSlice';
 import { showWarning } from '../../js/message';
+import { selectContact } from '../../redux/singleContact';
+import { toggleModal } from '../../redux/modalSlice';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -24,11 +26,12 @@ const ContactsSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export const ContactForm = () => {
+export const EditForm = () => {
   const nameId = useId();
   const numberId = useId();
   const emailId = useId();
   const dispatch = useDispatch();
+  const contact = useSelector(selectContact);
   const contacts = useSelector(selectContacts);
   const submitForm = (values, actions) => {
     if (
@@ -38,12 +41,17 @@ export const ContactForm = () => {
     ) {
       return showWarning(values.name);
     }
-    dispatch(addContact(values));
+    const newContact = { id: contact.id, ...values };
+    dispatch(editContact(newContact));
     actions.resetForm();
   };
   return (
     <Formik
-      initialValues={{ name: '', number: '', email: '' }}
+      initialValues={{
+        name: `${contact.name}`,
+        number: `${contact.number}`,
+        email: `${contact.email}`,
+      }}
       onSubmit={submitForm}
       validationSchema={ContactsSchema}
     >
@@ -94,10 +102,18 @@ export const ContactForm = () => {
             <ErrorMessage name="name" as="span" />
           </span>
         </div>
-
-        <button className={css.button} type="submit">
-          Add Contact
-        </button>
+        <div className={css.btnWrap}>
+          <button className={css.button} type="submit">
+            Save
+          </button>
+          <button
+            className={css.button}
+            type="button"
+            onClick={() => dispatch(toggleModal(false))}
+          >
+            Cancel
+          </button>
+        </div>
       </Form>
     </Formik>
   );
