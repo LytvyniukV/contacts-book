@@ -1,6 +1,6 @@
 import css from './Notification.module.css';
 
-export const Notification = () => {
+export default function Notification() {
   return (
     <div className={css.container}>
       <p className={css.text}>
@@ -8,4 +8,4 @@ export const Notification = () => {
       </p>
     </div>
   );
-};
+}

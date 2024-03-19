@@ -2,14 +2,14 @@ import css from './Contact.module.css';
 import { FaPhone } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
-import { setContact } from '../../redux/singleContact';
+import { deleteContact, setId } from '../../redux/contactsSlice';
+
 import { toggleModal } from '../../redux/modalSlice';
 import { IoMdMail } from 'react-icons/io';
-export const Contact = ({ contact }) => {
+export default function Contact({ contact }) {
   const dispatch = useDispatch();
   const openEditing = () => {
-    dispatch(setContact(contact));
+    dispatch(setId(contact.id));
     dispatch(toggleModal(true));
   };
   return (
@@ -18,13 +18,15 @@ export const Contact = ({ contact }) => {
         <p className={css.text}>
           <FaUser className={css.icon} size={15} /> {contact.name}
         </p>
-        <p className={css.number}>
+        <a href={`tel: ${contact.number}`} className={css.number}>
           <FaPhone className={css.icon} size={15} /> {contact.number}
-        </p>
-        <p className={css.email}>
-          <IoMdMail className={css.icon} size={20} />
-          {contact.email}
-        </p>
+        </a>
+        {contact.email && (
+          <a href={`mailto: ${contact.email}`} className={css.email}>
+            <IoMdMail className={css.icon} size={20} />
+            {contact.email}
+          </a>
+        )}
       </div>
       <div className={css.btnWrap}>
         <button className={css.button} type="button" onClick={openEditing}>
@@ -40,4 +42,4 @@ export const Contact = ({ contact }) => {
       </div>
     </>
   );
-};
+}

@@ -1,8 +1,8 @@
-import { SearchBox } from './SearchBox/SearchBox';
-import { ContactList } from './ContactList/ContactList';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Notification } from './Notification/Notification';
-import { Title } from './Title/Title';
+import SearchBox from './SearchBox/SearchBox';
+import ContactList from './ContactList/ContactList';
+import ContactForm from './ContactForm/ContactForm';
+import Notification from './Notification/Notification';
+import Title from './Title/Title';
 import { useSelector } from 'react-redux';
 import ModalEditForm from './ModalEditForm/ModalEditForm';
 

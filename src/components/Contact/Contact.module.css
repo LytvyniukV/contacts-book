@@ -12,11 +12,17 @@
   font-size: 22px;
   color: black;
 }
+.number:hover{
+  color: rgb(203, 6, 6);
+}
 .email {
   font-size: 24px;
   color: black;
   display: flex;
   align-items: center;
+}
+.email:hover{
+  color: rgb(203, 6, 6);
 }
 .button {
   width: 100px;

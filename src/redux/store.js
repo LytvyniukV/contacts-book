@@ -13,7 +13,6 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { modalReducer } from './modalSlice';
-import { contactReducer } from './singleContact';
 
 const persistedContactsReducer = persistReducer(
   {
@@ -28,7 +27,6 @@ export const store = configureStore({
     contacts: persistedContactsReducer,
     filters: filterReducer,
     modal: modalReducer,
-    contact: contactReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -58,3 +58,20 @@
     display: flex;
     gap: 15px;
   }
+
+  .email{
+    position: relative;
+  }
+  .icon{
+    color: red;
+  }
+  .closeMail{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    display: flex;
+    background-color: inherit;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }

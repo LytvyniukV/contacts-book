@@ -1,12 +1,16 @@
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import css from './EditForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { editContact, selectContacts } from '../../redux/contactsSlice';
-import { showWarning } from '../../js/message';
-import { selectContact } from '../../redux/singleContact';
+import {
+  editContact,
+  selectContacts,
+  selectId,
+} from '../../redux/contactsSlice';
 import { toggleModal } from '../../redux/modalSlice';
+import AddFieldButton from '../AddFieldButton/AddFieldButton';
+import { FaMinusCircle } from 'react-icons/fa';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -20,27 +24,23 @@ const ContactsSchema = Yup.object().shape({
     .max(12, 'Too Long! Max 12 symbols')
     .matches(phoneRegExp, 'Phone number is not valid. Only numbers!')
     .required('Required'),
-  email: Yup.string()
-    .min(3, 'Too Short! Min 3 symbols')
-    .max(50, 'Too Long! Max 50 symbols')
-    .required('Required'),
+  email: Yup.string().email('Must be email form'),
 });
 
-export const EditForm = () => {
+export default function EditForm() {
   const nameId = useId();
   const numberId = useId();
   const emailId = useId();
   const dispatch = useDispatch();
-  const contact = useSelector(selectContact);
+  const contactId = useSelector(selectId);
   const contacts = useSelector(selectContacts);
+  const [isEmailActive, setIsEmailActive] = useState(false);
+
+  const contact = contacts.find(contact => contact.id === contactId);
+  useEffect(() => {
+    if (contact.email) setIsEmailActive(true);
+  }, [contact.email]);
   const submitForm = (values, actions) => {
-    if (
-      contacts.find(
-        contact => contact.name.toLowerCase() === values.name.toLowerCase()
-      )
-    ) {
-      return showWarning(values.name);
-    }
     const newContact = { id: contact.id, ...values };
     dispatch(editContact(newContact));
     dispatch(toggleModal(false));
@@ -51,7 +51,7 @@ export const EditForm = () => {
       initialValues={{
         name: `${contact.name}`,
         number: `${contact.number}`,
-        email: `${contact.email}`,
+        email: `${contact.email ? contact.email : ''}`,
       }}
       onSubmit={submitForm}
       validationSchema={ContactsSchema}
@@ -88,21 +88,36 @@ export const EditForm = () => {
             <ErrorMessage name="number" as="span" />
           </span>
         </div>
-        <div>
-          <label className={css.label} htmlFor={emailId}>
-            email
-          </label>
-          <Field
-            type="email"
-            name="email"
-            id={emailId}
-            className={css.input}
-            autoComplete="off"
-          />
-          <span className={css.error}>
-            <ErrorMessage name="name" as="span" />
-          </span>
-        </div>
+
+        {isEmailActive && (
+          <div className={css.email}>
+            {!contact.email && (
+              <button
+                className={css.closeMail}
+                type="button"
+                onClick={() => setIsEmailActive(false)}
+              >
+                <FaMinusCircle size={20} className={css.icon} />
+              </button>
+            )}
+            <label className={css.label} htmlFor={emailId}>
+              email
+            </label>
+            <Field
+              type="email"
+              name="email"
+              id={emailId}
+              className={css.input}
+              autoComplete="off"
+            />
+          </div>
+        )}
+        {!isEmailActive && !contact.email && (
+          <AddFieldButton onClick={() => setIsEmailActive(true)}>
+            Add email
+          </AddFieldButton>
+        )}
+
         <div className={css.btnWrap}>
           <button className={css.button} type="submit">
             Save
@@ -118,4 +133,4 @@ export const EditForm = () => {
       </Form>
     </Formik>
   );
-};
+}

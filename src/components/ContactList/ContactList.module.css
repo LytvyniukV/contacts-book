@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   margin-left: 20px;
 }
 
@@ -19,6 +19,5 @@
 
 .item:hover,
 .item:focus {
-  scale: 1.03;
   box-shadow: 3px 2px 2cqh rgb(83, 125, 133);
 }
