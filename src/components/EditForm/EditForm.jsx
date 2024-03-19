@@ -2,13 +2,9 @@ import { useEffect, useId, useState } from 'react';
 import css from './EditForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  editContact,
-  selectContacts,
-  selectId,
-} from '../../redux/contactsSlice';
-import { toggleModal } from '../../redux/modalSlice';
+import { useDispatch } from 'react-redux';
+import { editContact } from '../../redux/contactsSlice';
+
 import AddFieldButton from '../AddFieldButton/AddFieldButton';
 import { FaMinusCircle } from 'react-icons/fa';
 
@@ -27,23 +23,20 @@ const ContactsSchema = Yup.object().shape({
   email: Yup.string().email('Must be email form'),
 });
 
-export default function EditForm() {
+export default function EditForm({ contact, onCloseModal }) {
   const nameId = useId();
   const numberId = useId();
   const emailId = useId();
   const dispatch = useDispatch();
-  const contactId = useSelector(selectId);
-  const contacts = useSelector(selectContacts);
   const [isEmailActive, setIsEmailActive] = useState(false);
 
-  const contact = contacts.find(contact => contact.id === contactId);
   useEffect(() => {
     if (contact.email) setIsEmailActive(true);
   }, [contact.email]);
   const submitForm = (values, actions) => {
     const newContact = { id: contact.id, ...values };
     dispatch(editContact(newContact));
-    dispatch(toggleModal(false));
+    onCloseModal(false);
     actions.resetForm();
   };
   return (
@@ -125,7 +118,7 @@ export default function EditForm() {
           <button
             className={css.button}
             type="button"
-            onClick={() => dispatch(toggleModal(false))}
+            onClick={() => onCloseModal(false)}
           >
             Cancel
           </button>

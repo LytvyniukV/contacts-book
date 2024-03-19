@@ -2,16 +2,13 @@ import css from './Contact.module.css';
 import { FaPhone } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { deleteContact, setId } from '../../redux/contactsSlice';
-
-import { toggleModal } from '../../redux/modalSlice';
+import { deleteContact } from '../../redux/contactsSlice';
+import ModalEditForm from '../ModalEditForm/ModalEditForm';
 import { IoMdMail } from 'react-icons/io';
+import { useState } from 'react';
 export default function Contact({ contact }) {
   const dispatch = useDispatch();
-  const openEditing = () => {
-    dispatch(setId(contact.id));
-    dispatch(toggleModal(true));
-  };
+  const [isEditing, setIsEditing] = useState(false);
   return (
     <>
       <div className={css.contactWrap}>
@@ -29,7 +26,11 @@ export default function Contact({ contact }) {
         )}
       </div>
       <div className={css.btnWrap}>
-        <button className={css.button} type="button" onClick={openEditing}>
+        <button
+          className={css.button}
+          type="button"
+          onClick={() => setIsEditing(true)}
+        >
           Edit
         </button>
         <button
@@ -40,6 +41,11 @@ export default function Contact({ contact }) {
           Delete
         </button>
       </div>
+      <ModalEditForm
+        contact={contact}
+        onClose={setIsEditing}
+        isModal={isEditing}
+      />
     </>
   );
 }

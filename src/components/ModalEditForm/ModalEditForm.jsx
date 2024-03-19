@@ -1,23 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectModal, toggleModal } from '../../redux/modalSlice';
 import EditForm from '../EditForm/EditForm';
 import ReactModal from 'react-modal';
 import css from './ModalEditForm.module.css';
 ReactModal.setAppElement('body');
 
-export default function ModalEditForm() {
-  const dispatch = useDispatch();
-  const modalIsOpen = useSelector(selectModal);
-  const closeModal = () => dispatch(toggleModal(false));
+export default function ModalEditForm({ contact, isModal, onClose }) {
   return (
     <ReactModal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
+      isOpen={isModal}
+      onRequestClose={onClose}
       shouldCloseOnOverlayClick={true}
       className={css.Modal}
       overlayClassName={css.Overlay}
     >
-      <EditForm />
+      <EditForm contact={contact} onCloseModal={onClose} />
     </ReactModal>
   );
 }
