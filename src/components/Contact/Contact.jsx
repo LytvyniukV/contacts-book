@@ -2,13 +2,21 @@ import css from './Contact.module.css';
 import { FaPhone } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
 import ModalEditForm from '../ModalEditForm/ModalEditForm';
 import { IoMdMail } from 'react-icons/io';
 import { useState } from 'react';
+import { deleteContact } from '../../redux/contactsOps';
+import toast from 'react-hot-toast';
 export default function Contact({ contact }) {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
+  const onClick = () => {
+    dispatch(deleteContact(contact.id))
+      .unwrap()
+      .then(() => {
+        toast.success('Contact was successfully deleted');
+      });
+  };
   return (
     <>
       <div className={css.contactWrap}>
@@ -33,11 +41,7 @@ export default function Contact({ contact }) {
         >
           Edit
         </button>
-        <button
-          className={css.button}
-          type="button"
-          onClick={() => dispatch(deleteContact(contact.id))}
-        >
+        <button className={css.button} type="button" onClick={onClick}>
           Delete
         </button>
       </div>

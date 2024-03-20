@@ -3,10 +3,11 @@ import css from './EditForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { editContact } from '../../redux/contactsSlice';
 
 import AddFieldButton from '../AddFieldButton/AddFieldButton';
 import { FaMinusCircle } from 'react-icons/fa';
+import { editContact } from '../../redux/contactsOps';
+import toast from 'react-hot-toast';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -35,7 +36,11 @@ export default function EditForm({ contact, onCloseModal }) {
   }, [contact.email]);
   const submitForm = (values, actions) => {
     const newContact = { id: contact.id, ...values };
-    dispatch(editContact(newContact));
+    dispatch(editContact(newContact))
+      .unwrap()
+      .then(() => {
+        toast.success('Contact was successfully updated');
+      });
     onCloseModal(false);
     actions.resetForm();
   };
