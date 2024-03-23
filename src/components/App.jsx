@@ -1,6 +1,5 @@
-import SearchBox from './SearchBox/SearchBox';
 import ContactList from './ContactList/ContactList';
-import ContactForm from './ContactForm/ContactForm';
+import FormsWrapper from './FormsWrapper/FormsWrapper';
 import Notification from './Notification/Notification';
 import Title from './Title/Title';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,8 +25,9 @@ function App() {
   return (
     <>
       <Title />
-      <ContactForm />
-      <SearchBox />
+
+      <FormsWrapper />
+
       {contacts.length > 0 ? <ContactList /> : <Notification />}
       {isLoading && !error && <Loader />}
       {error && <ErrorMessage />}

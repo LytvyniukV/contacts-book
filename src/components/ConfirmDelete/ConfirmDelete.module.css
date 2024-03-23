@@ -1,0 +1,51 @@
+.wrap {
+  background-color: rgb(219, 205, 188);
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 10px 5px 5px rgb(151, 149, 124);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid rgb(121, 193, 208);
+  border-radius: 20px;
+}
+.title {
+  margin-bottom: 20px;
+}
+.accent {
+  color: red;
+}
+.name {
+  text-transform: capitalize;
+  color: rgb(121, 193, 208);
+}
+.list {
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn {
+  padding: 10px;
+  width: 150px;
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
+.yesBtn {
+  composes: btn;
+  background-color: green;
+}
+.yesBtn:hover,
+.yesBtn:focus {
+  background-color: rgb(111, 202, 111);
+}
+.noBtn {
+  composes: btn;
+  background-color: red;
+}
+.noBtn:hover,
+.noBtn:focus {
+  background-color: rgb(213, 61, 61);
+}

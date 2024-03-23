@@ -1,18 +1,20 @@
-import EditForm from '../EditForm/EditForm';
 import ReactModal from 'react-modal';
-import css from './ModalEditForm.module.css';
+import css from './Modal.module.css';
 ReactModal.setAppElement('body');
 
-export default function ModalEditForm({ contact, isModal, onClose }) {
+export default function Modal({ children, isModal, onClose }) {
+  const closeModal = () => {
+    onClose(false);
+  };
   return (
     <ReactModal
       isOpen={isModal}
-      onRequestClose={onClose}
+      onRequestClose={closeModal}
       shouldCloseOnOverlayClick={true}
       className={css.Modal}
       overlayClassName={css.Overlay}
     >
-      <EditForm contact={contact} onCloseModal={onClose} />
+      {children}
     </ReactModal>
   );
 }

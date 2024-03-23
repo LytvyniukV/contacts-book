@@ -46,77 +46,82 @@ export default function ContactForm() {
     actions.resetForm();
   };
   return (
-    <Formik
-      initialValues={{ name: '', number: '', email: '' }}
-      onSubmit={submitForm}
-      validationSchema={ContactsSchema}
-    >
-      <Form className={css.form}>
-        <div>
-          <label className={css.label} htmlFor={nameId}>
-            name
-          </label>
-          <Field
-            type="text"
-            name="name"
-            id={nameId}
-            className={css.input}
-            autoComplete="off"
-          />
-          <span className={css.error}>
-            <ErrorMessage name="name" as="span" />
-          </span>
-        </div>
-
-        <div>
-          <label className={css.label} htmlFor={numberId}>
-            number
-          </label>
-          <Field
-            type="text"
-            name="number"
-            id={numberId}
-            className={css.input}
-            autoComplete="off"
-          />
-
-          <span className={css.error}>
-            <ErrorMessage name="number" as="span" />
-          </span>
-        </div>
-
-        {isEmailActive && (
-          <div className={css.email}>
-            <button
-              className={css.closeMail}
-              type="button"
-              onClick={() => setIsEmailActive(false)}
-            >
-              <FaMinusCircle size={20} className={css.icon} />
-            </button>
-            <label className={css.label} htmlFor={emailId}>
-              email
+    <div className={css.wrap}>
+      <h2 className={css.title}>
+        Create <span className={css.accent}>new</span> contact
+      </h2>
+      <Formik
+        initialValues={{ name: '', number: '', email: '' }}
+        onSubmit={submitForm}
+        validationSchema={ContactsSchema}
+      >
+        <Form className={css.form}>
+          <div>
+            <label className={css.label} htmlFor={nameId}>
+              name
             </label>
             <Field
-              type="email"
-              name="email"
-              id={emailId}
+              type="text"
+              name="name"
+              id={nameId}
               className={css.input}
               autoComplete="off"
             />
+            <span className={css.error}>
+              <ErrorMessage name="name" as="span" />
+            </span>
           </div>
-        )}
 
-        {!isEmailActive && (
-          <AddFieldButton onClick={() => setIsEmailActive(true)}>
-            Add email
-          </AddFieldButton>
-        )}
+          <div>
+            <label className={css.label} htmlFor={numberId}>
+              number
+            </label>
+            <Field
+              type="text"
+              name="number"
+              id={numberId}
+              className={css.input}
+              autoComplete="off"
+            />
 
-        <button className={css.button} type="submit">
-          Save Contact
-        </button>
-      </Form>
-    </Formik>
+            <span className={css.error}>
+              <ErrorMessage name="number" as="span" />
+            </span>
+          </div>
+
+          {isEmailActive && (
+            <div className={css.email}>
+              <button
+                className={css.closeMail}
+                type="button"
+                onClick={() => setIsEmailActive(false)}
+              >
+                <FaMinusCircle size={20} className={css.icon} />
+              </button>
+              <label className={css.label} htmlFor={emailId}>
+                email
+              </label>
+              <Field
+                type="email"
+                name="email"
+                id={emailId}
+                className={css.input}
+                autoComplete="off"
+              />
+            </div>
+          )}
+
+          {!isEmailActive && (
+            <AddFieldButton onClick={() => setIsEmailActive(true)}>
+              Add email
+            </AddFieldButton>
+          )}
+
+          <button className={css.button} type="submit">
+            Save Contact
+          </button>
+        </Form>
+      </Formik>
+    </div>
   );
 }

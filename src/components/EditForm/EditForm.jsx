@@ -40,8 +40,9 @@ export default function EditForm({ contact, onCloseModal }) {
       .unwrap()
       .then(() => {
         toast.success('Contact was successfully updated');
+        onCloseModal(false);
       });
-    onCloseModal(false);
+
     actions.resetForm();
   };
   return (

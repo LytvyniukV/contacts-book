@@ -1,22 +1,16 @@
 import css from './Contact.module.css';
 import { FaPhone } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import ModalEditForm from '../ModalEditForm/ModalEditForm';
+import Modal from '../Modal/Modal';
 import { IoMdMail } from 'react-icons/io';
 import { useState } from 'react';
-import { deleteContact } from '../../redux/contactsOps';
-import toast from 'react-hot-toast';
+import EditForm from '../EditForm/EditForm';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
+
 export default function Contact({ contact }) {
-  const dispatch = useDispatch();
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const onClick = () => {
-    dispatch(deleteContact(contact.id))
-      .unwrap()
-      .then(() => {
-        toast.success('Contact was successfully deleted');
-      });
-  };
+
   return (
     <>
       <div className={css.contactWrap}>
@@ -41,15 +35,20 @@ export default function Contact({ contact }) {
         >
           Edit
         </button>
-        <button className={css.button} type="button" onClick={onClick}>
+        <button
+          className={css.button}
+          type="button"
+          onClick={() => setIsDeleting(true)}
+        >
           Delete
         </button>
       </div>
-      <ModalEditForm
-        contact={contact}
-        onClose={setIsEditing}
-        isModal={isEditing}
-      />
+      <Modal onClose={setIsEditing} isModal={isEditing}>
+        <EditForm contact={contact} onCloseModal={setIsEditing} />
+      </Modal>
+      <Modal onClose={setIsDeleting} isModal={isDeleting}>
+        <ConfirmDelete contact={contact} onCloseModal={setIsDeleting} />
+      </Modal>
     </>
   );
 }
