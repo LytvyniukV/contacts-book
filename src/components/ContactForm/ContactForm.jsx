@@ -8,6 +8,7 @@ import { showWarning } from '../../js/message';
 import AddFieldButton from '../AddFieldButton/AddFieldButton';
 import { FaMinusCircle } from 'react-icons/fa';
 import { addContact } from '../../redux/contactsOps';
+import toast from 'react-hot-toast';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -42,7 +43,9 @@ export default function ContactForm() {
     ) {
       return showWarning(values.name);
     }
-    dispatch(addContact(values));
+    dispatch(addContact(values))
+      .unwrap()
+      .then(() => toast.success('Contact was successfully added'));
     actions.resetForm();
   };
   return (
