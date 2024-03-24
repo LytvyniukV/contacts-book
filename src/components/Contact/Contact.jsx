@@ -2,7 +2,6 @@ import css from './Contact.module.css';
 import { FaPhone } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa';
 import Modal from '../Modal/Modal';
-import { IoMdMail } from 'react-icons/io';
 import { useState } from 'react';
 import EditForm from '../EditForm/EditForm';
 import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
@@ -20,12 +19,6 @@ export default function Contact({ contact }) {
         <a href={`tel: ${contact.number}`} className={css.number}>
           <FaPhone className={css.icon} size={15} /> {contact.number}
         </a>
-        {contact.email && (
-          <a href={`mailto: ${contact.email}`} className={css.email}>
-            <IoMdMail className={css.icon} size={20} />
-            {contact.email}
-          </a>
-        )}
       </div>
       <div className={css.btnWrap}>
         <button
