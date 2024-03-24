@@ -1,11 +1,8 @@
-import { useEffect, useId, useState } from 'react';
+import { useId } from 'react';
 import css from './EditForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-
-import AddFieldButton from '../AddFieldButton/AddFieldButton';
-import { FaMinusCircle } from 'react-icons/fa';
 import { editContact } from '../../redux/contactsOps';
 import toast from 'react-hot-toast';
 
@@ -21,19 +18,13 @@ const ContactsSchema = Yup.object().shape({
     .max(12, 'Too Long! Max 12 symbols')
     .matches(phoneRegExp, 'Phone number is not valid. Only numbers!')
     .required('Required'),
-  email: Yup.string().email('Must be email form'),
 });
 
 export default function EditForm({ contact, onCloseModal }) {
   const nameId = useId();
   const numberId = useId();
-  const emailId = useId();
   const dispatch = useDispatch();
-  const [isEmailActive, setIsEmailActive] = useState(false);
 
-  useEffect(() => {
-    if (contact.email) setIsEmailActive(true);
-  }, [contact.email]);
   const submitForm = (values, actions) => {
     const newContact = { id: contact.id, ...values };
     dispatch(editContact(newContact))
@@ -50,7 +41,6 @@ export default function EditForm({ contact, onCloseModal }) {
       initialValues={{
         name: `${contact.name}`,
         number: `${contact.number}`,
-        email: `${contact.email ? contact.email : ''}`,
       }}
       onSubmit={submitForm}
       validationSchema={ContactsSchema}
@@ -87,35 +77,6 @@ export default function EditForm({ contact, onCloseModal }) {
             <ErrorMessage name="number" as="span" />
           </span>
         </div>
-
-        {isEmailActive && (
-          <div className={css.email}>
-            {!contact.email && (
-              <button
-                className={css.closeMail}
-                type="button"
-                onClick={() => setIsEmailActive(false)}
-              >
-                <FaMinusCircle size={20} className={css.icon} />
-              </button>
-            )}
-            <label className={css.label} htmlFor={emailId}>
-              email
-            </label>
-            <Field
-              type="email"
-              name="email"
-              id={emailId}
-              className={css.input}
-              autoComplete="off"
-            />
-          </div>
-        )}
-        {!isEmailActive && !contact.email && (
-          <AddFieldButton onClick={() => setIsEmailActive(true)}>
-            Add email
-          </AddFieldButton>
-        )}
 
         <div className={css.btnWrap}>
           <button className={css.button} type="submit">

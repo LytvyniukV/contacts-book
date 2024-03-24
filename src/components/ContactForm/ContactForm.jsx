@@ -1,12 +1,10 @@
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import css from './ContactForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from '../../redux/contactsSlice';
 import { showWarning } from '../../js/message';
-import AddFieldButton from '../AddFieldButton/AddFieldButton';
-import { FaMinusCircle } from 'react-icons/fa';
 import { addContact } from '../../redux/contactsOps';
 import toast from 'react-hot-toast';
 
@@ -22,18 +20,13 @@ const ContactsSchema = Yup.object().shape({
     .max(12, 'Too Long! Max 12 symbols')
     .matches(phoneRegExp, 'Phone number is not valid. Only numbers!')
     .required('Required'),
-  email: Yup.string().email('Must be email form'),
 });
 
 export default function ContactForm() {
   const nameId = useId();
   const numberId = useId();
-
-  const emailId = useId();
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-
-  const [isEmailActive, setIsEmailActive] = useState(false);
 
   const submitForm = (values, actions) => {
     if (
@@ -54,7 +47,7 @@ export default function ContactForm() {
         Create <span className={css.accent}>new</span> contact
       </h2>
       <Formik
-        initialValues={{ name: '', number: '', email: '' }}
+        initialValues={{ name: '', number: '' }}
         onSubmit={submitForm}
         validationSchema={ContactsSchema}
       >
@@ -91,34 +84,6 @@ export default function ContactForm() {
               <ErrorMessage name="number" as="span" />
             </span>
           </div>
-
-          {isEmailActive && (
-            <div className={css.email}>
-              <button
-                className={css.closeMail}
-                type="button"
-                onClick={() => setIsEmailActive(false)}
-              >
-                <FaMinusCircle size={20} className={css.icon} />
-              </button>
-              <label className={css.label} htmlFor={emailId}>
-                email
-              </label>
-              <Field
-                type="email"
-                name="email"
-                id={emailId}
-                className={css.input}
-                autoComplete="off"
-              />
-            </div>
-          )}
-
-          {!isEmailActive && (
-            <AddFieldButton onClick={() => setIsEmailActive(true)}>
-              Add email
-            </AddFieldButton>
-          )}
 
           <button className={css.button} type="submit">
             Save Contact
