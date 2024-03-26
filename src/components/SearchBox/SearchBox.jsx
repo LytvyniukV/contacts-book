@@ -4,9 +4,11 @@ import { useId } from 'react';
 import {
   changeFilterName,
   changeFilterNumber,
+} from '../../redux/filters/filtersSlice';
+import {
   selectFilterName,
   selectFilterNumber,
-} from '../../redux/filtersSlice';
+} from '../../redux/filters/filtersSelectors';
 export default function SearchBox() {
   const dispatch = useDispatch();
   const filterName = useSelector(selectFilterName);

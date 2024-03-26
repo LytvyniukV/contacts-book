@@ -1,38 +1,27 @@
-import ContactList from './ContactList/ContactList';
-import FormsWrapper from './FormsWrapper/FormsWrapper';
-import Notification from './Notification/Notification';
-import Title from './Title/Title';
-import { useDispatch, useSelector } from 'react-redux';
-import Loader from './Loader/Loader';
-import {
-  selectContacts,
-  selectError,
-  selectIsLoading,
-} from '../redux/contactsSlice';
-import { useEffect } from 'react';
-import { fetchContacts } from '../redux/contactsOps';
-import ErrorMessage from './ErrorMessage/ErrorMessage';
+import { Suspense, lazy } from 'react';
+import Loader from '../components/Loader/Loader';
+import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import Layout from './Layout/Layout';
+
+const HomePage = lazy(() => import('../pages/HomePage'));
+const ContactsPage = lazy(() => import('../pages/ContactsPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage'));
 
 function App() {
-  const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
   return (
-    <>
-      <Title />
-
-      <FormsWrapper />
-
-      {contacts.length > 0 ? <ContactList /> : <Notification />}
-      {isLoading && !error && <Loader />}
-      {error && <ErrorMessage />}
+    <Layout>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Routes>
+      </Suspense>
       <Toaster position="top-right" />
-    </>
+    </Layout>
   );
 }
 
