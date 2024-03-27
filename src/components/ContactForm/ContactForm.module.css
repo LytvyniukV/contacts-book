@@ -13,13 +13,11 @@
   display: flex;
   flex-direction: column;
   padding: 30px;
-  border: 1px solid rgb(121, 193, 208);
+  border: 1px solid rgba(5, 125, 111, 0.581);
   border-radius: 20px;
   gap: 5px;
   margin-bottom: 20px;
-  box-shadow: 10px 5px 5px rgb(151, 149, 124);
-
-  background-color: rgb(219, 205, 188);
+  background-color: rgba(5, 125, 111, 0.581);
 }
 .label {
   font-size: 24px;
@@ -38,7 +36,7 @@
 .input:hover,
 .input:focus {
   border: 2px solid rgb(121, 193, 208);
-  box-shadow: 3px 2px 2cqh rgb(83, 125, 133);
+  box-shadow: 3px 2px 2cqh rgb(13, 195, 232);
 }
 
 .button {
@@ -57,7 +55,7 @@
 .button:focus {
   scale: 1.1;
   border: 2px solid rgb(121, 193, 208);
-  box-shadow: 3px 2px 2cqh rgb(83, 125, 133);
+  box-shadow: 3px 2px 2cqh rgb(13, 195, 232);
 }
 .error {
   color: rgb(223, 46, 46);

@@ -17,17 +17,18 @@ export default function ContactsPage() {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
-    <>
+    <main>
       <Title />
       <FormsWrapper />
       {contacts.length > 0 ? <ContactList /> : <Notification />}
       {isLoading && !error && <Loader />}
       {error && <ErrorMessage />}
-    </>
+    </main>
   );
 }
