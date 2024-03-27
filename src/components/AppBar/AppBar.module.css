@@ -1,0 +1,5 @@
+.header {
+  display: flex;
+  padding: 10px;
+  border-bottom: 2px solid rgb(12, 172, 135);
+}

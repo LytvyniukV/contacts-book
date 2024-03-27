@@ -1,0 +1,22 @@
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.link {
+  color: black;
+  padding: 8px 15px;
+  font-size: 22px;
+  font-weight: 500;
+  transition: all ease-in-out 0.2s;
+}
+
+.link:hover {
+  border-bottom: 2px solid rgb(12, 172, 135);
+}
+.active {
+  color: white;
+
+  border-radius: 20px;
+  background-color: rgb(11, 120, 120);
+}
