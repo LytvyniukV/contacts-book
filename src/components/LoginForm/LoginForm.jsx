@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import css from './LoginForm.module.css';
 import { login } from '../../redux/auth/authOperations';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 const ContactsSchema = Yup.object().shape({
@@ -23,7 +24,7 @@ export default function LoginForm() {
   const submitForm = values => {
     dispatch(login(values))
       .unwrap()
-      .then(() => toast.success('Success'))
+      .then(() => toast.success('Login is successfull'))
       .catch(() => toast.error('Wrong password or email. Try again'));
   };
   return (
@@ -73,6 +74,13 @@ export default function LoginForm() {
         <button className={css.button} type="submit">
           log in
         </button>
+        <p className={css.text}>
+          or{' '}
+          <Link to="/register" className={css.link}>
+            create
+          </Link>{' '}
+          new account
+        </p>
       </Form>
     </Formik>
   );

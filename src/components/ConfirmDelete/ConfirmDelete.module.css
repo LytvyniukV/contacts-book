@@ -1,24 +1,22 @@
 .wrap {
-  background-color: rgb(219, 205, 188);
+  background-color: rgb(5, 125, 111);
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 10px 5px 5px rgb(151, 149, 124);
   width: 400px;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  border: 1px solid rgb(121, 193, 208);
   border-radius: 20px;
 }
 .title {
   margin-bottom: 20px;
 }
 .accent {
-  color: red;
+  color: rgba(255, 0, 0, 0.773);
 }
 .name {
   text-transform: capitalize;
-  color: rgb(121, 193, 208);
+  color: rgb(25, 204, 240);
 }
 .list {
   display: flex;
@@ -35,7 +33,7 @@
 }
 .yesBtn {
   composes: btn;
-  background-color: green;
+  background-color: rgb(22, 201, 22);
 }
 .yesBtn:hover,
 .yesBtn:focus {

@@ -29,7 +29,14 @@ export default function ContactsPage() {
     <main>
       <Title />
       <FormsWrapper />
-      {contacts.length > 0 ? <ContactList /> : <Notification />}
+      {contacts.length > 0 ? (
+        <ContactList />
+      ) : (
+        <Notification>
+          There are no contacts in your phonebook. Please add your first
+          contact!
+        </Notification>
+      )}
       {isLoading && <Loader />}
     </main>
   );

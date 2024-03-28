@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import css from './RegisterForm.module.css';
 import { register } from '../../redux/auth/authOperations';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 const ContactsSchema = Yup.object().shape({
@@ -120,6 +121,13 @@ export default function RegisterForm() {
         <button className={css.button} type="submit">
           Create account
         </button>
+        <p className={css.text}>
+          or{' '}
+          <Link to="/login" className={css.link}>
+            log in
+          </Link>{' '}
+          if you already have account
+        </p>
       </Form>
     </Formik>
   );

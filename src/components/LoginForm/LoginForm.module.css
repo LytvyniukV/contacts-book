@@ -54,3 +54,14 @@
   margin-top: 3px;
   font-size: 18px;
 }
+.text {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.link {
+  color: rgb(254, 242, 17);
+}
+.link:hover {
+  color: rgb(172, 72, 10);
+}
