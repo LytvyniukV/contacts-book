@@ -38,8 +38,15 @@ export default function ContactForm() {
     }
     dispatch(addContact(values))
       .unwrap()
-      .then(() => toast.success('Contact was successfully added'));
-    actions.resetForm();
+      .then(() => {
+        toast.success('Contact was successfully added');
+        actions.resetForm();
+      })
+      .catch(() =>
+        toast.error(
+          'Whoops, something went wrong! Please try reloading this page!'
+        )
+      );
   };
   return (
     <div className={css.wrap}>

@@ -1,19 +1,18 @@
+import { useSelector } from 'react-redux';
 import LoginForm from '../components/LoginForm/LoginForm';
-import GoBackBtn from '../components/GoBackBtn/GoBackBtn';
-import { Link, useLocation } from 'react-router-dom';
-import { useRef } from 'react';
+import { selectIsAuthLoading } from '../redux/auth/authSelectors';
+import Loader from '../components/Loader/Loader';
+import Title from '../components/Title/Title';
+import { Link } from 'react-router-dom';
 export default function LoginPage() {
-  const location = useLocation();
-  const btnLinkRef = useRef(location.state);
+  const isLoading = useSelector(selectIsAuthLoading);
   return (
-    <main>
-      <Link to={btnLinkRef.current}>
-        <GoBackBtn />
-      </Link>
-
+    <>
       <section>
+        <Title>Log In</Title>
         <LoginForm />
+        {isLoading && <Loader />}
       </section>
-    </main>
+    </>
   );
 }

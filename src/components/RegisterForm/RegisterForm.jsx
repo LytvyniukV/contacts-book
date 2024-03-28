@@ -29,11 +29,15 @@ export default function RegisterForm() {
 
   const dispatch = useDispatch();
 
-  const submitForm = (values, actions) => {
+  const submitForm = values => {
     dispatch(register(values))
       .unwrap()
-      .then(() => toast.success('Account was created'));
-    actions.resetForm();
+      .then(() => toast.success('Account was created'))
+      .catch(() =>
+        toast.error(
+          'Maybe this user is already created. Try another name or email!'
+        )
+      );
   };
   return (
     <Formik

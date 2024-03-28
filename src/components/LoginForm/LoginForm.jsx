@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import css from './LoginForm.module.css';
 import { login } from '../../redux/auth/authOperations';
+import toast from 'react-hot-toast';
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 const ContactsSchema = Yup.object().shape({
   email: Yup.string().email('Please, enter a valid email').required('Required'),
   password: Yup.string()
-    .matches(passwordRules, { message: 'Please create a stronger password' })
+    .matches(passwordRules, { message: 'Invalid password' })
     .required('Required'),
 });
 
@@ -19,9 +20,11 @@ export default function LoginForm() {
 
   const dispatch = useDispatch();
 
-  const submitForm = (values, actions) => {
-    dispatch(login(values));
-    actions.resetForm();
+  const submitForm = values => {
+    dispatch(login(values))
+      .unwrap()
+      .then(() => toast.success('Success'))
+      .catch(() => toast.error('Wrong password or email. Try again'));
   };
   return (
     <Formik

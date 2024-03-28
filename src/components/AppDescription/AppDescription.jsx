@@ -1,8 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import css from './AppDescription.module.css';
 
 export default function AppDescription() {
-  const location = useLocation();
   return (
     <>
       <p className={css.text}>
@@ -19,11 +18,11 @@ export default function AppDescription() {
       </p>
       <p className={css.text}>
         To start using Contact Book just{' '}
-        <Link to="/register" className={css.link} state={location}>
+        <Link to="/register" className={css.link}>
           create
         </Link>{' '}
         new account or{' '}
-        <Link to="/login" className={css.link} state={location}>
+        <Link to="/login" className={css.link}>
           login
         </Link>{' '}
         if you already have one.{' '}

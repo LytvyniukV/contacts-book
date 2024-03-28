@@ -1,20 +1,17 @@
-import { Link, useLocation } from 'react-router-dom';
-import GoBackBtn from '../components/GoBackBtn/GoBackBtn';
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import Title from '../components/Title/Title';
-import { useRef } from 'react';
+import { selectIsAuthLoading } from '../redux/auth/authSelectors';
+import Loader from '../components/Loader/Loader';
+import { useSelector } from 'react-redux';
 export default function RegisterPage() {
-  const location = useLocation();
-  const btnLinkRef = useRef(location.state);
+  const isLoading = useSelector(selectIsAuthLoading);
   return (
-    <main>
-      <Link to={btnLinkRef.current}>
-        <GoBackBtn />
-      </Link>
+    <>
       <section>
         <Title>create your account</Title>
         <RegisterForm />
+        {isLoading && <Loader />}
       </section>
-    </main>
+    </>
   );
 }

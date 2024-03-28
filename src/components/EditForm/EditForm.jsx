@@ -32,7 +32,12 @@ export default function EditForm({ contact, onCloseModal }) {
       .then(() => {
         toast.success('Contact was successfully updated');
         onCloseModal(false);
-      });
+      })
+      .catch(() =>
+        toast.error(
+          'Whoops, something went wrong! Please try reloading this page!'
+        )
+      );
 
     actions.resetForm();
   };

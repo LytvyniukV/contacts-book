@@ -10,7 +10,12 @@ export default function ConfirmDelete({ onCloseModal, contact }) {
       .then(() => {
         toast.success('Contact was successfully deleted');
         onCloseModal(false);
-      });
+      })
+      .catch(() =>
+        toast.error(
+          'Whoops, something went wrong! Please try reloading this page!'
+        )
+      );
   };
   return (
     <div className={css.wrap}>
