@@ -4,15 +4,15 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsRefreshing } from '../redux/auth/authSelectors';
-import { refreshUser } from '../redux/auth/authOperations';
+import { selectIsRefreshing } from '../redux/auth/selectors';
+import { refreshUser } from '../redux/auth/operations';
 import RestrictedRoute from './RestrictedRoute';
 import PrivateRoute from './PrivateRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const ContactsPage = lazy(() => import('../pages/ContactsPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage'));
-const RegisterPage = lazy(() => import('../pages/RegisterPage'));
+const RegistrationPage = lazy(() => import('../pages/RegistrationPage'));
 
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -30,7 +30,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route
               path="/register"
-              element={<RestrictedRoute component={<RegisterPage />} />}
+              element={<RestrictedRoute component={<RegistrationPage />} />}
             />
             <Route
               path="/login"
@@ -45,7 +45,7 @@ function App() {
         </Suspense>
         <Toaster
           position="top-center"
-          toastOptions={{ style: { width: '300px', height: '50px' } }}
+          toastOptions={{ style: { width: '500px', height: '50px' } }}
         />
       </main>
     </Layout>

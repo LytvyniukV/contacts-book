@@ -1,7 +1,7 @@
 import AppDescription from '../components/AppDescription/AppDescription';
 import Instructions from '../components/Instructions/Instructions';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../redux/auth/authSelectors';
+import { selectIsLoggedIn } from '../redux/auth/selectors';
 import Title from '../components/Title/Title';
 import UserHomeInterface from '../components/UserHomeInterface/UserHomeInterface';
 export default function HomePage() {

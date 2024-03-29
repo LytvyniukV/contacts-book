@@ -3,7 +3,7 @@ import { useId } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import css from './LoginForm.module.css';
-import { login } from '../../redux/auth/authOperations';
+import { login } from '../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;

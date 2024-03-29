@@ -3,7 +3,7 @@ import css from './EditForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { editContact } from '../../redux/contacts/contactsOps';
+import { editContact } from '../../redux/contacts/operations';
 import toast from 'react-hot-toast';
 
 const phoneRegExp =

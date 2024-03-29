@@ -1,15 +1,21 @@
 .item {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .list {
-  margin: 30px auto;
-  width: 700px;
+  display: flex;
+  gap: 10px;
+  margin: 60px auto;
   justify-content: space-between;
 }
 .text {
   text-align: center;
   font-size: 22px;
   margin-bottom: 10px;
+  background-color: rgb(176, 174, 174);
+  padding: 5px 10px;
+  border-radius: 20px;
 }

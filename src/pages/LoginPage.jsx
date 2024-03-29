@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import LoginForm from '../components/LoginForm/LoginForm';
-import { selectIsAuthLoading } from '../redux/auth/authSelectors';
+import { selectIsAuthLoading } from '../redux/auth/selectors';
 import Loader from '../components/Loader/Loader';
 import Title from '../components/Title/Title';
 export default function LoginPage() {

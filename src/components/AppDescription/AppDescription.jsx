@@ -13,7 +13,7 @@ export default function AppDescription() {
       </p>
       <p className={css.text}>
         Suitable searching by name and number gives you access to any contact by
-        writitng a few letters or digits
+        writitng a few letters or digits.
       </p>
       <p className={css.text}>
         To start using Contact Book just{' '}
@@ -23,8 +23,8 @@ export default function AppDescription() {
         new account or{' '}
         <Link to="/login" className={css.link}>
           login
-        </Link>{' '}
-        if you already have one.{' '}
+        </Link>
+        , if you already have one.{' '}
       </p>
     </>
   );

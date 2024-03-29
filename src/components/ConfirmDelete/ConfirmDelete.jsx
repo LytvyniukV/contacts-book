@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import css from './ConfirmDelete.module.css';
-import { deleteContact } from '../../redux/contacts/contactsOps';
+import { deleteContact } from '../../redux/contacts/operations';
 import toast from 'react-hot-toast';
 export default function ConfirmDelete({ onCloseModal, contact }) {
   const dispatch = useDispatch();

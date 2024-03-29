@@ -4,8 +4,8 @@ import {
   deleteContact,
   fetchContacts,
   editContact,
-} from './contactsOps';
-import { logout } from '../auth/authOperations';
+} from './operations';
+import { logout } from '../auth/operations';
 const handlePending = state => {
   state.isLoading = true;
 };

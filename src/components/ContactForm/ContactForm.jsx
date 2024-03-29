@@ -3,9 +3,9 @@ import css from './ContactForm.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from '../../redux/contacts/contactsSelectors';
+import { selectContacts } from '../../redux/contacts/selectors';
 import { showWarning } from '../../js/message';
-import { addContact } from '../../redux/contacts/contactsOps';
+import { addContact } from '../../redux/contacts/operations';
 import toast from 'react-hot-toast';
 
 const phoneRegExp =

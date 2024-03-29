@@ -2,10 +2,11 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useId } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import css from './RegisterForm.module.css';
-import { register } from '../../redux/auth/authOperations';
+import css from './RegistrationForm.module.css';
+import { register } from '../../redux/auth/operations';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 // min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 const ContactsSchema = Yup.object().shape({
@@ -15,25 +16,29 @@ const ContactsSchema = Yup.object().shape({
     .required('Required'),
   email: Yup.string().email('Please, enter a valid email').required('Required'),
   password: Yup.string()
-    .matches(passwordRules, { message: 'Please create a stronger password' })
+    .matches(passwordRules, {
+      message:
+        'Please create a stronger password. Min 5 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit',
+    })
     .required('Required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Required'),
 });
 
-export default function RegisterForm() {
+export default function RegistrationForm() {
   const nameId = useId();
   const emailId = useId();
   const passwordId = useId();
   const confirmPasswordId = useId();
-
   const dispatch = useDispatch();
 
   const submitForm = values => {
     dispatch(register(values))
       .unwrap()
-      .then(() => toast.success('Account was created'))
+      .then(() =>
+        toast.success(`Account was created! Welcome to your ContactBook!`)
+      )
       .catch(() =>
         toast.error(
           'Maybe this user is already created. Try another name or email!'
