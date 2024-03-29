@@ -4,17 +4,17 @@ export default function Instructions() {
     <ul className={css.list}>
       <li className={css.item}>
         <p className={css.text}>Simple form to add new contact</p>
-        <img src="../../../public/form.png" alt="form" width={600} />
+        <img src="/form.png" alt="form" width={600} />
       </li>
       <li className={css.item}>
         <p className={css.text}>Comfortable searchbox to find needed contact</p>
-        <img src="../../../public/filter.png" alt="form" width={600} />
+        <img src="/filter.png" alt="form" width={600} />
       </li>
       <li className={css.item}>
         <p className={css.text}>
           Contact card with buttons to edit and delete your contact
         </p>
-        <img src="../../../public/contact.png" alt="form" width={600} />
+        <img src="/contact.png" alt="form" width={600} />
       </li>
     </ul>
   );

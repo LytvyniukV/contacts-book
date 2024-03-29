@@ -20,13 +20,13 @@ export default function UserHomeInterface() {
         </div>
         <div className={css.imgWrap}>
           <img
-            src="./public/man.png"
+            src="/man.png"
             alt="man"
             width={300}
             className={css.imgPhonebook}
           />
           <img
-            src="./public/lady.png"
+            src="/lady.png"
             alt="lady "
             width={300}
             className={css.imgLady}
@@ -35,13 +35,13 @@ export default function UserHomeInterface() {
       </div>
       <ul className={css.list}>
         <li className={css.item}>
-          <img src="./public/children.png" alt="children" width={400} />
+          <img src="/children.png" alt="children" width={400} />
         </li>
         <li className={css.item}>
-          <img src="./public/people.png" alt="people" width={400} />
+          <img src="/people.png" alt="people" width={400} />
         </li>
         <li className={css.item}>
-          <img src="./public/oldPeople.png" alt="old people" width={400} />
+          <img src="/oldPeople.png" alt="old people" width={400} />
         </li>
       </ul>
     </>
